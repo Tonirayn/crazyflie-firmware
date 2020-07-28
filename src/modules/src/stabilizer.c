@@ -198,11 +198,15 @@ static void stabilizerTask(void* param)
 
       checkEmergencyStopTimeout();
 
-      if (emergencyStop) {
+    // TODO: this should go into the sitAw framework
+    bool upsideDown = sensorData.acc.z < -20.5f;
+
+    if (emergencyStop || upsideDown) {
         powerStop();
+      controllerInit(getControllerType());
+      crtpCommanderHighLevelStop();
       } else {
-        powerDistribution(&control);
-      }
+       powerDistribution(&control); }
 
 
     // stats

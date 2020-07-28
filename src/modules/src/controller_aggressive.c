@@ -207,7 +207,7 @@ void controllerAggressive(control_t *control, setpoint_t *setpoint,
   eR.z = y_axis_desired.x - 2*(y*(x*x_axis_desired.x + y*y_axis_desired.x - x*y_axis_desired.y) + w*(x*x_axis_desired.z + y*y_axis_desired.z)) + 2*(-(x_axis_desired.z*y) + w*(x_axis_desired.x + y_axis_desired.y) + x*y_axis_desired.z)*z - 2*y_axis_desired.x*fsqr(z) + x_axis_desired.y*(-1 + 2*fsqr(x) + 2*fsqr(z));
 
   // Account for Crazyflie coordinate system
-  eR.y = -eR.y;
+   eR.y = -eR.y;
 
   target_thrust.x = g_vehicleMass * setpoint->acceleration.x                       ;
   target_thrust.y = g_vehicleMass * setpoint->acceleration.y                       ;
@@ -346,7 +346,7 @@ void controllerAggressive(control_t *control, setpoint_t *setpoint,
   eR.z = y_axis_desired.x - 2*(y*(x*x_axis_desired.x + y*y_axis_desired.x - x*y_axis_desired.y) + w*(x*x_axis_desired.z + y*y_axis_desired.z)) + 2*(-(x_axis_desired.z*y) + w*(x_axis_desired.x + y_axis_desired.y) + x*y_axis_desired.z)*z - 2*y_axis_desired.x*fsqr(z) + x_axis_desired.y*(-1 + 2*fsqr(x) + 2*fsqr(z));
 
   // Account for Crazyflie coordinate system
-  eR.y = -eR.y;
+ // eR.y = -eR.y;
 
   if (prev_omega_roll == prev_omega_roll) { /*d part initialized*/
     err_d_roll = ((radians(setpoint->attitudeRate.roll) - prev_setpoint_omega_roll) - (stateAttitudeRateRoll - prev_omega_roll)) / dt;

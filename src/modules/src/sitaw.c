@@ -146,10 +146,10 @@ static void sitAwPreThrustUpdateCallOut(setpoint_t *setpoint)
          FIXME: Needs a flying/landing state (as soon as althold is enabled,
                                               we are not freefalling anymore)
        */
-   /*   if(sitAwFFDetected() && !sitAwTuDetected()) {
+  /*    if(sitAwFFDetected() && !sitAwTuDetected()) {
         setpoint->mode.z = modeVelocity;
         setpoint->velocity.z = 0;
-      }*/
+      } */
 #endif
 #endif
 }
