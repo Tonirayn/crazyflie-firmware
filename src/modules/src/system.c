@@ -52,6 +52,7 @@
 #include "comm.h"
 #include "stabilizer.h"
 #include "commander.h"
+#include "gainsloader.h" // added by Antonio Marino
 #include "console.h"
 #include "usblink.h"
 #include "mem.h"
@@ -153,6 +154,7 @@ void systemTask(void *arg)
   systemInit();
   commInit();
   commanderInit();
+  loaderInit(); // added by Antonio Marino
 
   StateEstimatorType estimator = anyEstimator;
   deckInit();

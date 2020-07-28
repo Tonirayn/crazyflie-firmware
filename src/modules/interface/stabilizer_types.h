@@ -148,6 +148,16 @@ typedef struct control_s {
   float thrust;
 } control_t;
 
+typedef struct gain_s {
+
+  uint32_t timestamp;
+
+  float Gain1 [12];
+  float Gain2 [12];
+  float Gain3 [12];
+  float Gain4 [12];
+} gain_t;
+
 typedef enum mode_e {
   modeDisable = 0,
   modeAbs,
