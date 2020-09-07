@@ -90,6 +90,7 @@ static float i_error_m_z = 0;
 static struct vec z_axis_desired;
 static float roll_desired; // deg
 static float pitch_desired; // deg
+static struct quat q;
 
 static float rollddes;
 static float dt;
@@ -167,7 +168,7 @@ void controllerAggressive(control_t *control, setpoint_t *setpoint,
   i_error_y += r_error.y * dt;
   i_error_y = clamp(i_error_y, -i_range_xy, i_range_xy);
 
-  struct quat q = mkquat(state->attitudeQuaternion.x, state->attitudeQuaternion.y, state->attitudeQuaternion.z, state->attitudeQuaternion.w);
+  q = mkquat(state->attitudeQuaternion.x, state->attitudeQuaternion.y, state->attitudeQuaternion.z, state->attitudeQuaternion.w);
   struct mat33 R = quat2rotmat(q);
 
   // [ew]
@@ -378,7 +379,7 @@ void controllerAggressive(control_t *control, setpoint_t *setpoint,
     control->thrust = massThrust * current_thrust;
   }
 
-  if (control->thrust > 0) {
+  if (control->thrust != 0) {
     control->roll = clamp(M.x, -32000, 32000);
     control->pitch = clamp(M.y, -32000, 32000);
     control->yaw = clamp(-M.z, -32000, 32000);
@@ -427,6 +428,10 @@ LOG_ADD(LOG_FLOAT, i_err_z, &i_error_z)
 LOG_ADD(LOG_FLOAT, rollddes, &rollddes)
 LOG_ADD(LOG_FLOAT, rolld, &stateAttitudeRateRoll)
 LOG_ADD(LOG_FLOAT, pitchd, &stateAttitudeRatePitch)
+LOG_ADD(LOG_FLOAT, qz, &(q.z))
+LOG_ADD(LOG_FLOAT, qy, &(q.y))
+LOG_ADD(LOG_FLOAT, qx, &(q.x))
+LOG_ADD(LOG_FLOAT, qw, &(q.w))
 LOG_ADD(LOG_FLOAT, gain1, &gain_setpoint.Gain1[0])
 LOG_ADD(LOG_FLOAT, gain2, &gain_setpoint.Gain1[1])
 LOG_ADD(LOG_FLOAT, gain3, &gain_setpoint.Gain1[2])
